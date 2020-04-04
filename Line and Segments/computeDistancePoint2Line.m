@@ -1,9 +1,10 @@
 function [D] = computeDistancePoint2Line(q, p1, p2)
-% computeDistancePoint2Line calculates the normal distance of point q to the line
-% passing through p1 and p2.
-% inputs: q, p1, p2
-% outputs: D 
-% Author: JhensenSoft
+    % computeDistancePoint2Line calculates the normal distance of point q 
+    % to the line passing through p1 and p2.
+    % Input: a point q and two distinct points p1 = (x1; y1) and p2 = (x2; y2) 
+    % defining a line.
+    % Output: the distance from q to the line dened by p1 and p2.
+    % Author: JhensenSoft
 
     % verify if q is a 1 x 2 vectors
     if( size(q) ~= 2)
@@ -41,9 +42,14 @@ function [D] = computeDistancePoint2Line(q, p1, p2)
     phi = acos( (d_qp1^2 - d_qp2^2 -d_p1p2^2)/(-2*d_qp2*d_p1p2) );
 
     % law of sines to find D
-    D = d_qp1*sin(theta);
-    if( isnan(sin(theta)));
-        % to catch NaN if point q lies on p1 or p2
+    if isnan(sin(theta))
         D = d_qp2*sin(phi);
+    else
+        D = d_qp1*sin(theta);
+    end
+    
+    % prevent arithmetic underflow
+    if abs(D) < .0000001
+        D = 0;
     end
 end
