@@ -3,6 +3,8 @@ function [a, b, c] = computeLineThroughTwoPoints(p1,p2)
 %and returns outputs a, b, c which define the line ax + by + c = 0
 %normalizing to a^2 + b^2 = 1
 
+% Author: JhensenSoft
+
 
     % verify if p1 and p2 are 1 x 2 vectors
     if( size(p1) ~= 2)
