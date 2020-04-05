@@ -1,8 +1,10 @@
 function [D] = computeDistancePoint2Polygon(q,P)
-    % computeDistancePoint2Polygon calculates the normal distance to the
-    % normal distance of point q to a polygon P of n vertices. 
+    % computeDistancePoint2Polygon calculates the normal distance to the normal distance of point q to a polygon P of n vertices. 
     % INPUT: q, P
     % OUTPUT: D
+    % This function will calculate the distance of point q to every point
+    % of every segment of polygon P and will return the closest normal 
+    %distance.
     
     %% verify inputs
     % verify q is a vector 1 x 2 
@@ -18,12 +20,26 @@ function [D] = computeDistancePoint2Polygon(q,P)
         end
     end
     
-    % for each vertex in P
-    %   find the distance between vertice of P and point q
-    %   store in array pointDist2Vertex
-    for jj = 1 : length(P)
-        pointDist2Vertex(jj) = computeDistancePoint2Segment(q, P(jj,:))
-    end
+    %% Algorithm
+    %  for every segment that makes up P
+    %   compute the nearest distance and mode of distance (i.e edge or
+    %   vertex).
+    %   find minimum distance in segmentDistance
     
+    % modified selection sort 
+    minDistance = Inf; 
+    for i = 1: length(P)-1
+      for j = i+1: length(P)
+          %current_d is the distance and modeOfDist is whether the normal
+          %distance is with respect to the vertex or the line segment
+         [current_d, modeOfDist]= computeDistancePoint2Segment(q,P(i,:),P(j,:));
+         if(current_d < minDistance)
+             minDistance = current_d; 
+             minMode = modeOfDist;  % not necessary, but good for visualization
+ 
+         end
+      end
+    end
+   D = minDistance;
 end
 

@@ -10,16 +10,20 @@ function [ D , w ] = computeDistancePoint2Segment(q,p1,p2 )
     % w = 2 if the closest point is p2.
     
     %verify if q is a 1 x 2 vectors
-    if( size(q) ~= [1,2])
+     % verify if q is a 1 x 2 vectors
+    [mq,nq] = size(q);
+    if(  mq~= 1 || nq ~=2)
         error('q must be a 1 x 2 vector')
         return;
     end
-    % verify if p1 and p2 are 1 x 2 vectors
-    if( size(p1) ~= [1,2])
+    % verify if p1 and p2 are 1 x 2 vectors    
+    [mp1,np1] = size(p1);
+    if( mp1 ~= 1 || np1 ~=2)
         error('p1 must be a 1 x 2 vector');
         return;
     end
-    if(size(p2) ~= [1,2])
+   [mp2,np2] = size(p2);
+    if( mp2 ~= 1 || np2 ~=2)
         error('p2 must be a 1 x 2 vector');
         return;
     end
