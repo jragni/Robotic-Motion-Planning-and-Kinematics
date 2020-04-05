@@ -1,4 +1,4 @@
-function [D] = computeDistancePoint2Polygon(q,P)
+function D = computeDistancePoint2Polygon(q,P)
     % computeDistancePoint2Polygon calculates the normal distance to the normal distance of point q to a polygon P of n vertices. 
     % INPUT: q, P
     % OUTPUT: D
@@ -18,6 +18,10 @@ function [D] = computeDistancePoint2Polygon(q,P)
             error('P must be a row vector of vectors that are 1 x 2');
             return;
         end
+    end
+    %% verify if point q is within polygon P
+    if(inpolygon(q(1),q(2),P(:,2),P(:,2)))
+        error('point q lies within the polygon P');
     end
     
     %% Algorithm
