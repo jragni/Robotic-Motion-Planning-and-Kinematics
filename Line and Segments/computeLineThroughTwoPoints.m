@@ -37,8 +37,6 @@ function [a, b, c] = computeLineThroughTwoPoints(p1,p2)
     % => C = -x1/(x2 - x1) + y1/(y2-y1)
     C = (y1/(y2-y1)) - (x1/(x2-x1));
     
-  
-    
     % normalize to A^2 + B^2 = 1
     norm_factor = sqrt(A^2 + B^2);
     a = A / norm_factor;
@@ -55,10 +53,10 @@ function [a, b, c] = computeLineThroughTwoPoints(p1,p2)
     
     %% if vertical line
     if ( A == Inf || A == -Inf)
-        
+        a = 1; 
+        b = 0;
+        c = -p1(1);
     end
-    a = 1; 
-    b = 0;
-    c = -p1(1);
+    
 end
 
