@@ -14,7 +14,7 @@ function D = computeDistancePoint2Polygon(q,P)
     end
     % verify that each row in P is a 1 x 2 vector
     for ii = 1 : length(P)
-        if size(P(ii,:))~=[1 , 2]
+        if length(P(ii,:))~=2
             error('P must be a row vector of vectors that are 1 x 2');
             return;
         end
