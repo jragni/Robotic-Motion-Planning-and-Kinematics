@@ -1,6 +1,6 @@
 function path = Bug0Algorithm(start,goal,obstaclesList,stepSize)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%Bug0Algorithm implements the Bug 0 algorithm and plots the path taken.
+%returns the path.
 
 % initialize variables
 currentPose = start;
@@ -34,26 +34,28 @@ while ~success
         if obsCheckDist < closestObsDist
             closeIndex = i;
             closestObstacle = obstaclesList{closeIndex};
-            disp('object updated')
         end
     end
     closestObstacle = obstaclesList{closeIndex};
+    
     % move towards goal
     u = vectorPoint2Point(currentPose,goal);
     nextPose = u*stepSize/2 + currentPose;
     
+    % if line between current pose goal lies in obstacle, follow tangent
+    % of polygon
     if(inpolygon(nextPose(1),nextPose(2),closestObstacle(:,1),closestObstacle(:,2)))
-        disp('hit')
         clear nextPose
-        nextPose = -u*stepSize/2 + currentPose;
+        nextPose = -u*stepSize + currentPose; % move back from boundary
         u = vectorTangent2Polygon(currentPose,closestObstacle);
         currentPose = u*stepSize/2 + currentPose;
     else
         currentPose = nextPose;
     end
     
+    % update path and plot
     path = [path;currentPose];
-    plot(path(:,1),path(:,2),'*')
+    plot(path(:,1),path(:,2),'.-')
     pause(.01)
     
 end
