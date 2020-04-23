@@ -1,1 +1,1 @@
-This repository hold the models for a unicycle drive and differential drive robot.
+This repository hold the models for a non-linear/lineaar unicycle drive and differential drive robot. 
