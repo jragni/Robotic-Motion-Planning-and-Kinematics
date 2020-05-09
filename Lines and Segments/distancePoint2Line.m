@@ -8,7 +8,7 @@ function [d] = distancePoint2Line(q,p1,p2)
 % get projection of point q onto line p1-p2
 
 % ax + by + c = 0 
-d = abs((-q(1)*a - q(2)*b + c)/sqrt(a^2+b^2));
+d = abs(( q(1)*a + q(2)*b + c)/sqrt(a^2+b^2));
 
 end
 

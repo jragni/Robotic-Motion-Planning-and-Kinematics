@@ -1,0 +1,10 @@
+function [ output_args ] = extractPath(vGoal,parent)
+%EXTRACTPATH Summary of this function goes here
+%   Detailed explanation goes here
+    
+%create an array P = [vGoal]
+P = [vGoal]
+u = vGoal
+while parent(u) ~= parent(u
+end
+
